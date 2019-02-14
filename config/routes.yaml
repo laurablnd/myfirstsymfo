@@ -39,3 +39,19 @@ telephone_modify:
 telephone_index:
   path : /telephone/
   controller: App\Controller\TelephoneController::index
+
+telephone_tri:
+  path : /telephone/tri
+  controller: App\Controller\TelephoneController::tri
+
+telephone_search:
+  path: /telephone/search/{marque}
+  controller: App\Controller\TelephoneController::search
+  requirements:
+       marque: '[A-Za-z]+'
+
+telephone_advancedsearch:
+  path: /telephone/search/{marque}
+  controller: App\Controller\TelephoneController::advancedsearch
+  requirements:
+       marque: '[A-Za-z]+'

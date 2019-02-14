@@ -74,6 +74,28 @@ class TelephoneController extends Controller
       ));
   }
 
+  public function tri() {
+        $repo = $this->getDoctrine()
+                     ->getRepository(Telephone::class);
+        $tels = $repo->findBiggerSizeThan(5);
+
+      return $this->render('telephonetri.html.twig', array(
+          "tels" => $tels,
+      ));
+  }
+
+  public function search($marque) {
+        $repo = $this->getDoctrine()
+                     ->getRepository(Telephone::class);
+        $tels = $repo->findMarque($marque);
+   
+
+      return $this->render('telephonemarque.html.twig', array(
+          "tels" => $tels,
+          "marque" => $marque
+      ));
+  }
+
 }
 
 ?>

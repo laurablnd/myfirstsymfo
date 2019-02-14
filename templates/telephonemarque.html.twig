@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+Liste des téléphones avec une marque {{marque}}
+<ul>
+	{% for tels in tels %}
+	<br>Téléphone {{ tels.id }}
+   	Marque {{ tels.marque }}
+   	Type {{ tels.type }}
+   	Taille {{ tels.taille }}
+	{% endfor %}
+{% endblock %}

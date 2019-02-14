@@ -47,8 +47,52 @@ class TelephoneRepository extends ServiceEntityRepository
         ;
     }
     */
+    
+    /*public function findBiggerSizeThan($value){
+                   // récupération de l'em
+            $em = $this->getEntityManager();
+
+            // création de la requête
+            $query = $em->createQuery(
+                'SELECT t
+                FROM App\Entity\Telephone t
+                WHERE t.taille > :size'
+            )->setParameter('size', $value);
+
+            // exécution et renvoie de la requête sous la forme de tableau d'entités
+            return $query->execute();
+    }*/
+
     public function findBiggerSizeThan($value){
-        // doit renvoyer un tableau d'entités correspondantes à la contrainte
-        // comme la fonction findBy par exemple
+            // on travaille sur l'entité Telephone (le Repo est associé à l'entité Telephone)
+            // 't' est l'alias que nous pouvons utiliser par la suite.
+            $qb = $this->createQueryBuilder('t');
+
+            // ajout d'une clause 'Where'
+            // FROM et SELECT ne sont pas indispensable vu que le qb a été construit en lien avec l'entité Telephone
+            $qb->andWhere('t.taille >= :size')
+                ->setParameter('size', $value);
+
+            // récupération de la requête
+            $query = $qb->getQuery();
+
+            // exécution et renvoie du résultat
+            return $query->execute();
+    }
+
+     public function findMarque($value){
+                   // récupération de l'em
+            $em = $this->getEntityManager();
+
+            // création de la requête
+            $query = $em->createQuery(
+                'SELECT t
+                FROM App\Entity\Telephone t
+                WHERE t.marque = :marque
+                ORDER BY t.marque ASC'
+            )->setParameter('marque', $value);
+
+            // exécution et renvoie de la requête sous la forme de tableau d'entités
+            return $query->execute();
     }
 }
